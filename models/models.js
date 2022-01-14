@@ -18,7 +18,9 @@ const Movie = connection.define("Movies", {
       const rawValue = this.getDataValue("title");
       return firstUpper(rawValue);
     },
-    set: firstUpper,
+    set(value) {
+      this.setDataValue("title", firstUpper(value));
+    },
   },
 
   actor: {
