@@ -5,19 +5,9 @@ const argv = yargs(hideBin(process.argv)).argv;
 
 const { Movie } = require("./models/models");
 const connection = require("./db/connection");
-const { addMovie, listMovie } = require("./utils/index");
+const { addMovie, listMovies, updateMovies } = require("./utils/index");
 
 const app = async (commandLineInput) => {
-  //   if (commandLineInput.add) {
-  //     if (commandLineInput.movie) {
-  //       console.log(
-  //         `We are adding ${commandLineInput.title} with the actor ${commandLineInput.actor}`
-  //       );
-  //     } else if (commandLineInput.album) {
-  //       console.log(`We are adding this album ${commandLineInput.name}`);
-  //     }
-  //   }
-
   try {
     connection.authenticate();
   } catch (error) {
@@ -33,7 +23,13 @@ const app = async (commandLineInput) => {
         rating: commandLineInput.rating,
       });
     } else if (commandLineInput.list) {
-      await listMovie();
+      await listMovies();
+    } else if (commandLineInput.update && commandLineInput.to) {
+      if (commandLineInput.title) {
+        await updateMovies(commandLineInput.title, commandLineInput.to);
+      } else {
+        throw "update didn't do  zilch";
+      }
     }
   } catch (error) {
     console.log(error);
