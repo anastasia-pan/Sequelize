@@ -24,7 +24,7 @@ const updateMovies = async (title, updatedTitle) => {
   try {
     const movie = await Movie.findOne({ where: { title: title } });
     console.log(JSON.stringify(movie));
-    // console.log(`We updated ${movie.title}.`);
+    console.log(`We updated ${movie.title}.`);
     try {
       movie.title = updatedTitle;
       movie.save();
@@ -37,8 +37,17 @@ const updateMovies = async (title, updatedTitle) => {
   }
 };
 
+const deleteMovies = async (title) => {
+  try {
+    Movie.destroy({ where: { title: title } });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   addMovie,
   listMovies,
   updateMovies,
+  deleteMovies,
 };

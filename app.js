@@ -5,7 +5,12 @@ const argv = yargs(hideBin(process.argv)).argv;
 
 const { Movie } = require("./models/models");
 const connection = require("./db/connection");
-const { addMovie, listMovies, updateMovies } = require("./utils/index");
+const {
+  addMovie,
+  listMovies,
+  updateMovies,
+  deleteMovies,
+} = require("./utils/index");
 
 const app = async (commandLineInput) => {
   try {
@@ -30,6 +35,8 @@ const app = async (commandLineInput) => {
       } else {
         throw "update didn't do  zilch";
       }
+    } else if (commandLineInput.delete) {
+      deleteMovies(commandLineInput.title);
     }
   } catch (error) {
     console.log(error);

@@ -23,15 +23,6 @@ const firstUpper = (rawValue) => {
   }
 };
 
-const setTitle = (value) => {
-  try {
-    this.getDataValue("title");
-    this.setDataValue(value);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const setLower = (value) => {
   const newValue = value.toLowerCase();
   return newValue;
@@ -45,7 +36,6 @@ const changeItem = (value, updatedValue) => {
 module.exports = {
   setApproval,
   firstUpper,
-  setTitle,
   changeItem,
   // setActor,
   // setRating,
